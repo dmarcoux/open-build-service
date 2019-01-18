@@ -10,7 +10,8 @@ RSpec.describe StagingProjectCopyJob, type: :job, vcr: true do
   include ActiveJob::TestHelper
 
   describe '#perform' do
-    let(:staging_workflow_project) { create(:staging_workflow).project }
+    let(:staging_workflow_project) { create(:project, name: 'my_project') }
+    let!(:staging_workflow) { create(:staging_workflow, project: staging_workflow_project) }
     let(:original_staging_project) { staging_workflow_project.staging.staging_projects.first }
     let(:staging_project_copy_name) { "#{original_staging_project.name}-copy" }
 

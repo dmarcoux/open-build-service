@@ -1,8 +1,212 @@
 ---
 http_interactions:
 - request:
+    method: put
+    uri: http://backend:5352/source/my_project/_meta?user=_nobody_
+    body:
+      encoding: UTF-8
+      string: |
+        <project name="my_project">
+          <title>Mr Standfast</title>
+          <description/>
+        </project>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '99'
+    body:
+      encoding: UTF-8
+      string: |
+        <project name="my_project">
+          <title>Mr Standfast</title>
+          <description></description>
+        </project>
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
+    method: put
+    uri: http://backend:5352/source/my_project/_project/_staging_workflow?user=_nobody_
+    body:
+      encoding: UTF-8
+      string: |
+        <workflow project="my_project" managers="staging-workflow-managers-1">
+          <staging_project name="my_project:Staging:A"/>
+        </workflow>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '170'
+    body:
+      encoding: UTF-8
+      string: |
+        <revision rev="1">
+          <srcmd5>55e6dddca7dae9aacbad0d843acbb3d0</srcmd5>
+          <time>1547813638</time>
+          <user>_nobody_</user>
+          <comment></comment>
+          <requestid/>
+        </revision>
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
+    method: put
+    uri: http://backend:5352/source/my_project:Staging:A/_meta?user=_nobody_
+    body:
+      encoding: UTF-8
+      string: |
+        <project name="my_project:Staging:A">
+          <title/>
+          <description/>
+          <group groupid="staging-workflow-managers-1" role="maintainer"/>
+        </project>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '165'
+    body:
+      encoding: UTF-8
+      string: |
+        <project name="my_project:Staging:A">
+          <title></title>
+          <description></description>
+          <group groupid="staging-workflow-managers-1" role="maintainer" />
+        </project>
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
+    method: put
+    uri: http://backend:5352/source/my_project/_project/_staging_workflow?user=_nobody_
+    body:
+      encoding: UTF-8
+      string: |
+        <workflow project="my_project" managers="staging-workflow-managers-1">
+          <staging_project name="my_project:Staging:A"/>
+          <staging_project name="my_project:Staging:B"/>
+        </workflow>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '170'
+    body:
+      encoding: UTF-8
+      string: |
+        <revision rev="2">
+          <srcmd5>cc139e06c82bb7d36078874e5f20082a</srcmd5>
+          <time>1547813638</time>
+          <user>_nobody_</user>
+          <comment></comment>
+          <requestid/>
+        </revision>
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
+    method: put
+    uri: http://backend:5352/source/my_project:Staging:B/_meta?user=_nobody_
+    body:
+      encoding: UTF-8
+      string: |
+        <project name="my_project:Staging:B">
+          <title/>
+          <description/>
+          <group groupid="staging-workflow-managers-1" role="maintainer"/>
+        </project>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '165'
+    body:
+      encoding: UTF-8
+      string: |
+        <project name="my_project:Staging:B">
+          <title></title>
+          <description></description>
+          <group groupid="staging-workflow-managers-1" role="maintainer" />
+        </project>
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
     method: get
-    uri: http://backend:5352/source/project_1:Staging:A/_config
+    uri: http://backend:5352/source/my_project:Staging:A/_config
     body:
       encoding: US-ASCII
       string: ''
@@ -15,8 +219,39 @@ http_interactions:
       - Ruby
   response:
     status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/plain
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
+    method: put
+    uri: http://backend:5352/source/my_project:Staging:A-copy/_config?comment=Copying%20project%20my_project:Staging:A&user=
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
       code: 404
-      message: project 'project_1 Staging A' does not exist
+      message: project 'my_project Staging A-copy' does not exist
     headers:
       Content-Type:
       - text/xml
@@ -25,14 +260,141 @@ http_interactions:
       Connection:
       - close
       Content-Length:
-      - '166'
+      - '178'
     body:
       encoding: UTF-8
       string: |
         <status code="404">
-          <summary>project 'project_1:Staging:A' does not exist</summary>
-          <details>404 project 'project_1:Staging:A' does not exist</details>
+          <summary>project 'my_project:Staging:A-copy' does not exist</summary>
+          <details>404 project 'my_project:Staging:A-copy' does not exist</details>
         </status>
     http_version: 
-  recorded_at: Mon, 14 Jan 2019 15:55:25 GMT
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
+    method: put
+    uri: http://backend:5352/source/my_project/_project/_staging_workflow?user=_nobody_
+    body:
+      encoding: UTF-8
+      string: |
+        <workflow project="my_project" managers="staging-workflow-managers-1">
+          <staging_project name="my_project:Staging:A"/>
+          <staging_project name="my_project:Staging:B"/>
+          <staging_project name="my_project:Staging:A-copy"/>
+        </workflow>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '170'
+    body:
+      encoding: UTF-8
+      string: |
+        <revision rev="3">
+          <srcmd5>aa44a849361de881fb749073ecb93280</srcmd5>
+          <time>1547813638</time>
+          <user>_nobody_</user>
+          <comment></comment>
+          <requestid/>
+        </revision>
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
+    method: put
+    uri: http://backend:5352/source/my_project/_project/_staging_workflow?user=_nobody_
+    body:
+      encoding: UTF-8
+      string: |
+        <workflow project="my_project" managers="staging-workflow-managers-1">
+          <staging_project name="my_project:Staging:A"/>
+          <staging_project name="my_project:Staging:B"/>
+          <staging_project name="my_project:Staging:A-copy"/>
+        </workflow>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '170'
+    body:
+      encoding: UTF-8
+      string: |
+        <revision rev="4">
+          <srcmd5>aa44a849361de881fb749073ecb93280</srcmd5>
+          <time>1547813638</time>
+          <user>_nobody_</user>
+          <comment></comment>
+          <requestid/>
+        </revision>
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
+- request:
+    method: put
+    uri: http://backend:5352/source/my_project:Staging:A-copy/_meta?user=_nobody_
+    body:
+      encoding: UTF-8
+      string: |
+        <project name="my_project:Staging:A-copy">
+          <title/>
+          <description/>
+          <group groupid="staging-workflow-managers-1" role="maintainer"/>
+        </project>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Length:
+      - '170'
+    body:
+      encoding: UTF-8
+      string: |
+        <project name="my_project:Staging:A-copy">
+          <title></title>
+          <description></description>
+          <group groupid="staging-workflow-managers-1" role="maintainer" />
+        </project>
+    http_version: 
+  recorded_at: Fri, 18 Jan 2019 12:13:58 GMT
 recorded_with: VCR 4.0.0
