@@ -64,6 +64,7 @@ module Webui::Staging::WorkflowHelper
     css = 'obsolete' if request[:state].in?(BsRequest::OBSOLETE_STATES)
     link_content = [request[:package]]
     link_content << reviewers_gravatar(request, users_hash, groups_hash) if request[:missing_reviews].present?
+    link_content << raw('&nbsp;')
     content_tag(:span, class: "badge state-#{css}") do
       link_to(request_show_path(request[:number]), class: 'request') do
         safe_join(link_content)
