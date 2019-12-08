@@ -341,5 +341,19 @@ module Webui::WebuiHelper
   def home_title
     @configuration ? @configuration['title'] : 'Open Build Service'
   end
+
+  def pick_max_problems(failed_checks, build_problems, max_shown)
+    show_checks = [max_shown, failed_checks.length].min
+    show_builds = [max_shown - show_checks, build_problems.length].min
+    # always prefer one build fail
+    if show_builds == 0 && build_problems.present?
+      show_builds += 1
+      show_checks -= 1
+    end
+
+    picked_checks = failed_checks.shift(show_checks)
+    picked_build_problems = build_problems.shift(show_builds)
+    return picked_checks, picked_build_problems, failed_checks, build_problems
+  end
 end
 # rubocop:enable Metrics/ModuleLength
