@@ -1,4 +1,4 @@
-- problems = merge_broken_packages(taging_project.broken_packages)
+- problems = merge_broken_packages(staging_project.broken_packages)
 
 %td.p-2.w-25.font-weight-bold
   %i.mr-2.fas{ class: problems.empty? ? 'fa-check-circle text-primary' : 'fa-exclamation-triangle text-warning' }
@@ -13,8 +13,8 @@
         = state
         = surround '(', ')' do
           - values.each do |value|
-            - coma = ', ' unless values.last == value
-            = succeed coma do
+            - comma = ', ' unless values.last == value
+            = succeed comma do
               - if ['unresolvable', 'broken'].include?(state)
                 = value[:arch]
               - else
