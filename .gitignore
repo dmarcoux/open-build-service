@@ -34,7 +34,9 @@
 /src/api/db/schema.rb
 /src/api/files/distributions.xml
 /src/api/log
+/src/api/node_modules
 /src/api/public/assets
+/src/api/public/packs
 /src/api/mkmf.log
 /src/api/tmp
 /src/api/spec/examples.txt

@@ -89,6 +89,8 @@ gem 'coderay'
 gem 'bigdecimal'
 # Catch unsafe migrations in development
 gem 'strong_migrations'
+# Manage JavaScript modules in Rails
+gem 'webpacker', '~> 4.x'
 
 group :development, :production do
   # to have the delayed job daemon
