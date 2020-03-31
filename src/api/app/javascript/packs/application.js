@@ -16,3 +16,7 @@
 // const imagePath = (name) => images(name, true)
 
 console.log('Hello World from Webpacker')
+require("jquery-ui").start()
+require("moment").start()
+require("datatables.net-dt").start()
+require("rails-ujs").start()

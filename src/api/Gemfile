@@ -77,7 +77,7 @@ gem 'addressable'
 gem 'builder'
 # to write the rails metrics directly into InfluxDB.
 gem 'influxdb-rails', '1.0.0'
-# for client side time ago
+# TODELETE for client side time ago
 gem 'rails-timeago', '~> 2.0'
 # for copying objects with their relations
 gem 'deep_cloneable', '~> 3.0.0'
@@ -198,23 +198,23 @@ group :assets do
   gem 'uglifier', '>= 1.2.2'
   # to use sass in the asset pipeline
   gem 'sassc-rails'
-  # assets for jQuery DataTables
+  # TODELETE assets for jQuery DataTables
   gem 'jquery-datatables'
-  # assets for jQuery tokeninput
+  # TODELETE assets for jQuery tokeninput
   gem 'rails_tokeninput', '>= 1.6.1.rc1'
   # to create our sprite images/stylesheets
   gem 'sprite-factory', '>= 1.5.2'
   # to read and write PNG images
   gem 'chunky_png'
-  # assets for jQuery and jQuery-ujs
+  # TODELETE assets for jQuery and jQuery-ujs
   gem 'jquery-rails'
-  # assets for jQuery-ui
+  # TODELETE assets for jQuery-ui
   gem 'jquery-ui-rails', '~> 4.2.1'
   # assets for the bootstrap front-end framework
   gem 'bootstrap'
   # assets for font-awesome vector icons
   gem 'font-awesome-sass'
-  # assets for formatting dates
+  # TODELETE assets for formatting dates
   gem 'momentjs-rails'
   # for catching javascript exceptions
   source 'https://rails-assets.org' do
