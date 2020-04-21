@@ -1,6 +1,7 @@
 class Notification < ApplicationRecord
   belongs_to :subscriber, polymorphic: true
   belongs_to :notifiable, polymorphic: true
+  has_many :projects, through: :notifications_projects
 
   serialize :event_payload, JSON
 
