@@ -331,4 +331,77 @@ RSpec.feature 'Packages', type: :feature, js: true, vcr: true do
       end
     end
   end
+
+  context 'creating a package' do
+    describe 'in a project owned by the user, eg. home projects' do
+      let(:very_long_description) { Faker::Lorem.paragraph(sentence_count: 20) }
+
+      before do
+        login user
+        # This could be in the feature specs of the project controller, but we want to test the whole workflow, so we do it here
+        visit project_show_path(project: user.home_project)
+        click_link('Create Package')
+        expect(page).to have_text("Create Package for #{user.home_project_name}")
+      end
+
+      scenario 'with invalid data (validation fails)' do
+        fill_in 'package_name', with: 'cool stuff'
+        click_button('Create')
+
+        expect(page).to have_text("Invalid package name: 'cool stuff'")
+        expect(page.current_path).to eq("/package/new/#{user.home_project_name}")
+      end
+
+      scenario 'that already exists' do
+        create(:package, name: 'coolstuff', project: user.home_project)
+
+        fill_in 'package_name', with: 'coolstuff'
+        click_button('Create')
+
+        expect(page).to have_text("Package 'coolstuff' already exists in project '#{user.home_project_name}'")
+        expect(page.current_path).to eq("/package/new/#{user.home_project_name}")
+      end
+
+      scenario 'with valid data' do
+        fill_in 'package_name', with: 'coolstuff'
+        fill_in 'package_title', with: 'cool stuff everyone needs'
+        fill_in 'package_description', with: very_long_description
+        click_button 'Create'
+
+        expect(page).to have_text("Package 'coolstuff' was created successfully")
+        expect(page).to have_current_path(package_show_path(project: user.home_project_name, package: 'coolstuff'))
+        expect(find(:css, '#package-title')).to have_text('cool stuff everyone needs')
+        expect(find(:css, '#description-text')).to have_text(very_long_description)
+      end
+    end
+
+    describe 'in a project not owned by the user, eg. global namespace' do
+      let(:admin_user) { create(:admin_user, :with_home) }
+      let(:global_project) { create(:project, name: 'global_project') }
+
+      scenario 'as non-admin user' do
+        login other_user
+        visit project_show_path(project: global_project)
+        expect(page).not_to have_link('Create package')
+
+        # Use direct path instead
+        visit "/package/new/#{global_project}"
+
+        expect(page).to have_text('Sorry, you are not authorized to update this Project')
+        expect(page.current_path).to eq(root_path)
+      end
+
+      scenario 'as an admin' do
+        login admin_user
+        visit project_show_path(project: global_project)
+        click_link('Create Package')
+
+        fill_in 'package_name', with: 'coolstuff'
+        click_button('Create')
+
+        expect(page).to have_text("Package 'coolstuff' was created successfully")
+        expect(page.current_path).to eq(package_show_path(project: global_project.to_s, package: 'coolstuff'))
+      end
+    end
+  end
 end
