@@ -69,7 +69,8 @@ OBSApi::Application.routes.draw do
         get 'package/requests/:project/:package' => :requests, as: 'package_requests', constraints: cons
         get 'package/statistics/:project/:package/:repository/:arch' => :statistics, as: 'package_statistics', constraints: cons
         get 'package/revisions/:project/:package' => :revisions, constraints: cons, as: 'package_view_revisions'
-        post 'package/submit_request/:project/:package' => :submit_request, constraints: cons
+        get 'package/submit_request/:project/:package' => :submit_request, as: 'package_submit_request', constraints: cons
+        post 'package/submit_request/:project/:package' => :create_submit_request, as: 'package_create_submit_request', constraints: cons
         get 'package/rdiff/:project/:package' => :rdiff, constraints: cons, as: 'package_rdiff'
         post 'package/create/:project' => :create, constraints: cons, as: 'packages'
         get 'package/new/:project' => :new, constraints: cons, as: 'new_package'

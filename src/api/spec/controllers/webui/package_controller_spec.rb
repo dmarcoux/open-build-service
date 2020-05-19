@@ -41,7 +41,7 @@ RSpec.describe Webui::PackageController, vcr: true do
     HEREDOC
   end
 
-  describe 'POST #submit_request' do
+  describe 'POST #create_submit_request' do
     let(:target_package) { package.name }
 
     RSpec.shared_examples 'a response of a successful submit request' do
@@ -56,7 +56,7 @@ RSpec.describe Webui::PackageController, vcr: true do
 
     context 'sending a valid submit request' do
       before do
-        post :submit_request, params: { project: source_project, package: package, targetproject: target_project }
+        post :create_submit_request, params: { project: source_project, package: package, targetproject: target_project }
       end
 
       it_should_behave_like 'a response of a successful submit request'
@@ -66,7 +66,7 @@ RSpec.describe Webui::PackageController, vcr: true do
       let(:target_package) { 'different_package' }
 
       before do
-        post :submit_request, params: { project: source_project, package: package, targetproject: target_project, targetpackage: target_package }
+        post :create_submit_request, params: { project: source_project, package: package, targetproject: target_project, targetpackage: target_package }
       end
 
       it_should_behave_like 'a response of a successful submit request'
@@ -74,7 +74,7 @@ RSpec.describe Webui::PackageController, vcr: true do
 
     context "sending a valid submit request with 'sourceupdate' parameter" do
       before do
-        post :submit_request, params: { project: source_project, package: package, targetproject: target_project, sourceupdate: 'update' }
+        post :create_submit_request, params: { project: source_project, package: package, targetproject: target_project, sourceupdate: 'update' }
       end
 
       it_should_behave_like 'a response of a successful submit request'
@@ -87,7 +87,7 @@ RSpec.describe Webui::PackageController, vcr: true do
 
     context 'superseeding a request that does not exist' do
       before do
-        post :submit_request, params: { project: source_project, package: package, targetproject: target_project, supersede_request_numbers: [42] }
+        post :create_submit_request, params: { project: source_project, package: package, targetproject: target_project, supersede_request_numbers: [42] }
       end
 
       it { expect(flash[:success]).to match(" Superseding failed: Couldn't find request with id '42'") }
@@ -97,7 +97,7 @@ RSpec.describe Webui::PackageController, vcr: true do
 
     context 'having whitespaces in parameters' do
       before do
-        post :submit_request, params: { project: " #{source_project} ", package: " #{package} ", targetproject: " #{target_project} " }
+        post :create_submit_request, params: { project: " #{source_project} ", package: " #{package} ", targetproject: " #{target_project} " }
       end
 
       it_should_behave_like 'a response of a successful submit request'
@@ -106,7 +106,7 @@ RSpec.describe Webui::PackageController, vcr: true do
     context 'sending a submit request for an older submission' do
       before do
         3.times { |i| Backend::Connection.put("/source/#{source_project}/#{package}/somefile.txt", i.to_s) }
-        post :submit_request, params: { project: source_project, package: package, targetproject: target_project, rev: 2 }
+        post :create_submit_request, params: { project: source_project, package: package, targetproject: target_project, rev: 2 }
       end
 
       it_should_behave_like 'a response of a successful submit request'
@@ -126,7 +126,7 @@ RSpec.describe Webui::PackageController, vcr: true do
     context 'not successful' do
       before do
         Backend::Connection.put("/source/#{source_project}/#{source_package}/_link", "<link project='/Invalid'/>")
-        post :submit_request, params: { project: source_project, package: source_package, targetproject: target_project.name }
+        post :create_submit_request, params: { project: source_project, package: source_package, targetproject: target_project.name }
       end
 
       it { expect(flash[:error]).to eq('Unable to submit: The source of package home:tom/my_package is broken') }
@@ -137,7 +137,7 @@ RSpec.describe Webui::PackageController, vcr: true do
     context 'a submit request that fails due to validation errors' do
       before do
         login(user)
-        post :submit_request, params: { project: source_project, package: package, targetproject: target_project, sourceupdate: 'invalid' }
+        post :create_submit_request, params: { project: source_project, package: package, targetproject: target_project, sourceupdate: 'invalid' }
       end
 
       it do
@@ -151,7 +151,7 @@ RSpec.describe Webui::PackageController, vcr: true do
 
     context 'unchanged sources' do
       before do
-        post :submit_request, params: { project: source_project, package: package, targetproject: source_project }
+        post :create_submit_request, params: { project: source_project, package: package, targetproject: source_project }
       end
 
       it { expect(flash[:error]).to eq('Unable to submit, sources are unchanged') }
@@ -161,7 +161,7 @@ RSpec.describe Webui::PackageController, vcr: true do
 
     context 'invalid request (missing parameters)' do
       before do
-        post :submit_request, params: { project: source_project, package: '', targetproject: source_project }
+        post :create_submit_request, params: { project: source_project, package: '', targetproject: source_project }
       end
 
       it { expect(flash[:error]).to eq("Unable to submit: #{source_project}/") }
@@ -171,7 +171,7 @@ RSpec.describe Webui::PackageController, vcr: true do
 
     context 'sending a submit request without target' do
       before do
-        post :submit_request, params: { project: 'unknown', package: package, targetproject: target_project, targetpackage: target_package }
+        post :create_submit_request, params: { project: 'unknown', package: package, targetproject: target_project, targetpackage: target_package }
       end
 
       it 'creates a submit request with correct sourceupdate attibute' do
