@@ -58,6 +58,11 @@ OBSApi::Application.routes.draw do
     end
 
     defaults format: 'html' do
+      controller 'webui/requests/submits' do
+        get 'package/submit_request/:project/:package' => :new, as: 'package_submit_request', constraints: cons
+        post 'package/submit_request/:project/:package' => :create_submit_request, as: 'package_create_submit_request', constraints: cons
+      end
+
       controller 'webui/package' do
         get 'package/branch_diff_info/:project/:package' => :branch_diff_info, as: 'package_branch_diff_info', constraints: cons
         get 'package/dependency/:project/:package' => :dependency, constraints: cons, as: 'package_dependency'
@@ -69,8 +74,6 @@ OBSApi::Application.routes.draw do
         get 'package/requests/:project/:package' => :requests, as: 'package_requests', constraints: cons
         get 'package/statistics/:project/:package/:repository/:arch' => :statistics, as: 'package_statistics', constraints: cons
         get 'package/revisions/:project/:package' => :revisions, constraints: cons, as: 'package_view_revisions'
-        get 'package/submit_request/:project/:package' => :submit_request, as: 'package_submit_request', constraints: cons
-        post 'package/submit_request/:project/:package' => :create_submit_request, as: 'package_create_submit_request', constraints: cons
         get 'package/rdiff/:project/:package' => :rdiff, constraints: cons, as: 'package_rdiff'
         post 'package/create/:project' => :create, constraints: cons, as: 'packages'
         get 'package/new/:project' => :new, constraints: cons, as: 'new_package'

@@ -13,7 +13,7 @@
             Please describe what you have done and why they should apply your changes.
             The owner will be notified with the following details.
         .col-12.col-md-9.col-xl-6
-          = form_tag({ controller: 'package', action: 'create_submit_request' }, method: 'post') do
+          = form_tag(package_create_submit_request_path(@project, @package), method: 'post') do
             = hidden_field_tag(:project, @project)
             = hidden_field_tag(:package, @package)
             = hidden_field_tag(:rev, @revision)
