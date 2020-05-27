@@ -94,7 +94,7 @@ module Webui
         flash[:success] = "Created <a href='#{request_show_path(req.number)}'>submit request #{req.number}</a>\
                           to <a href='#{project_show_path(target_project_name)}'>#{target_project_name}</a>
                           #{supersede_notice}"
-        redirect_to(action: 'show', project: project_name, package: package_name)
+        redirect_to(action: 'show', controller: '/webui/package', project: project_name, package: package_name)
       end
 
     end

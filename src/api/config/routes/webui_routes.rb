@@ -60,7 +60,7 @@ OBSApi::Application.routes.draw do
     defaults format: 'html' do
       controller 'webui/requests/submits' do
         get 'package/submit_request/:project/:package' => :new, as: 'package_submit_request', constraints: cons
-        post 'package/submit_request/:project/:package' => :create_submit_request, as: 'package_create_submit_request', constraints: cons
+        post 'package/submit_request/:project/:package' => :create, as: 'package_create_submit_request', constraints: cons
       end
 
       controller 'webui/package' do
