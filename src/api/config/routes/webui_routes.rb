@@ -58,11 +58,6 @@ OBSApi::Application.routes.draw do
     end
 
     defaults format: 'html' do
-      controller 'webui/requests/submits' do
-        get 'package/submit_request/:project/:package' => :new, as: 'package_submit_request', constraints: cons
-        post 'package/submit_request/:project/:package' => :create, as: 'package_create_submit_request', constraints: cons
-      end
-
       controller 'webui/package' do
         get 'package/branch_diff_info/:project/:package' => :branch_diff_info, as: 'package_branch_diff_info', constraints: cons
         get 'package/dependency/:project/:package' => :dependency, constraints: cons, as: 'package_dependency'
@@ -271,6 +266,7 @@ OBSApi::Application.routes.draw do
       resources :packages, only: [], param: :name do
         resources :role_additions, controller: 'webui/requests/role_additions', only: [:new, :create], constraints: cons
         resources :deletions, controller: 'webui/requests/deletions', only: [:new, :create], constraints: cons
+        resources :submissions, controller: 'webui/requests/submissions', only: [:new, :create], constraints: cons
       end
 
       resources :role_additions, controller: 'webui/requests/role_additions', only: [:new, :create], constraints: cons
