@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
 
   include RescueHandler
 
+  before_action :initialize_current_attributes
+
+  def initialize_current_attributes
+    Current.user = User.session
+    Current.policy_method = method(:policy)
+  end
+
   # session :disabled => true
 
   @skip_validation = false

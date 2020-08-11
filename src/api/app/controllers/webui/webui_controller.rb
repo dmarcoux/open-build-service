@@ -22,6 +22,13 @@ class Webui::WebuiController < ActionController::Base
   before_action :current_announcement
   after_action :clean_cache
 
+  before_action :initialize_current_attributes
+
+  def initialize_current_attributes
+    Current.user = User.session
+    Current.policy_method = method(:policy)
+  end
+
   # :notice and :alert are default, we add :success and :error
   add_flash_types :success, :error
 
