@@ -6,6 +6,8 @@ require 'rails/all'
 Bundler.require(*Rails.groups(assets: ['development', 'test']))
 require_relative '../lib/rabbitmq_bus'
 
+require 'view_component/engine'
+
 module OBSApi
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
