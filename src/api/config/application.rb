@@ -110,5 +110,13 @@ module OBSApi
       g.test_framework :rspec
       g.orm :active_record, primary_key_type: :integer
     end
+
+    # View components
+    # Preview classes of view components live in:
+    config.view_component.preview_paths << "#{Rails.root}/spec/components/previews"
+    # Previews are served at (we keep the default value - http://HOST:PORT/rails/view_components)
+    # config.view_component.preview_route = "/rails/view_components"
+    # Set the default layout for previews (app/views/layouts/NAME.html.haml)
+    config.view_component.default_preview_layout = "view_component_previews"
   end
 end
