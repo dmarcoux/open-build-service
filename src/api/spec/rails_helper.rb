@@ -18,12 +18,16 @@ require 'spec_helper'
 require 'rspec/rails'
 # for pundit policy
 require 'pundit/rspec'
+# for view components
+require "view_component/test_helpers"
 
 # check for pending migration and apply them before tests are run.
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include Haml::Helpers
+
+  config.include ViewComponent::TestHelpers, type: :component
 
   # load ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
