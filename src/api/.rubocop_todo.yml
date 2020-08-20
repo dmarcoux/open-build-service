@@ -93,7 +93,7 @@ Lint/UriEscapeUnescape:
     - 'spec/models/package_spec.rb'
     - 'test/functional/request_controller_test.rb'
 
-# Offense count: 807
+# Offense count: 811
 # Configuration parameters: IgnoredMethods.
 Metrics/AbcSize:
   Max: 235
@@ -493,7 +493,7 @@ Naming/MethodParameterName:
     - 'test/models/event_test.rb'
     - 'test/test_helper.rb'
 
-# Offense count: 49
+# Offense count: 50
 # Configuration parameters: NamePrefix, ForbiddenPrefixes, AllowedMethods, MethodDefinitionMacros.
 # NamePrefix: is_, has_, have_
 # ForbiddenPrefixes: is_, has_, have_
@@ -1295,7 +1295,7 @@ Style/ConditionalAssignment:
     - 'spec/support/database_cleaner.rb'
     - 'test/functional/source_controller_test.rb'
 
-# Offense count: 845
+# Offense count: 846
 Style/Documentation:
   Enabled: false
 
@@ -1306,7 +1306,7 @@ Style/ExplicitBlockArgument:
     - 'app/lib/backend/connection.rb'
     - 'app/models/project.rb'
 
-# Offense count: 1435
+# Offense count: 1436
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: always, always_true, never
@@ -1319,33 +1319,10 @@ Style/IdenticalConditionalBranches:
     - 'app/controllers/build_controller.rb'
     - 'app/controllers/webui/search_controller.rb'
 
-# Offense count: 274
+# Offense count: 212
 # Cop supports --auto-correct.
 Style/IfUnlessModifier:
   Exclude:
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/architectures_controller.rb'
-    - 'app/controllers/attribute_controller.rb'
-    - 'app/controllers/build_controller.rb'
-    - 'app/controllers/issue_trackers_controller.rb'
-    - 'app/controllers/person/token_controller.rb'
-    - 'app/controllers/person_controller.rb'
-    - 'app/controllers/public_controller.rb'
-    - 'app/controllers/request_controller.rb'
-    - 'app/controllers/source_attribute_controller.rb'
-    - 'app/controllers/source_controller.rb'
-    - 'app/controllers/source_project_controller.rb'
-    - 'app/controllers/source_project_package_meta_controller.rb'
-    - 'app/controllers/staging/workflows_controller.rb'
-    - 'app/controllers/webui/attribute_controller.rb'
-    - 'app/controllers/webui/package_controller.rb'
-    - 'app/controllers/webui/packages/files_controller.rb'
-    - 'app/controllers/webui/project_controller.rb'
-    - 'app/controllers/webui/projects/status_controller.rb'
-    - 'app/controllers/webui/repositories_controller.rb'
-    - 'app/controllers/webui/search_controller.rb'
-    - 'app/controllers/webui/users/notifications_controller.rb'
-    - 'app/controllers/webui/webui_controller.rb'
     - 'app/models/architecture.rb'
     - 'app/models/attrib_namespace.rb'
     - 'app/models/attrib_type.rb'
@@ -1564,7 +1541,7 @@ Style/RescueStandardError:
 Style/StringConcatenation:
   Enabled: false
 
-# Offense count: 339
+# Offense count: 341
 # Cop supports --auto-correct.
 # Configuration parameters: MinSize.
 # SupportedStyles: percent, brackets
@@ -1578,7 +1555,7 @@ Style/SymbolArray:
 Style/WordArray:
   Enabled: false
 
-# Offense count: 1836
+# Offense count: 1855
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
