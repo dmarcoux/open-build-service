@@ -1,3 +1,16 @@
+**Replace this placeholder text with a summary of the changes included in your
+pull request. For tips, refer to the comment below**
+
+----------
+
+Before submitting the pull request, make sure
+
+* [ ] Wrote [good commit messages][1].
+* [ ] Commit message starts with `[Fix #issue-number]` (if the related issue exists).
+* [ ] Feature branch is up-to-date with `master` (if not - rebase it).
+* [ ] Squashed related commits together.
+* [ ] Added
+
 <!---
 If you haven't done so already, please read the CONTRIBUTING.md file to learn
 how we work and what we expect from all contributors.
