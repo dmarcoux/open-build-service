@@ -43,19 +43,27 @@ class ProjectRemoveTest < ActiveSupport::TestCase
     other_package.destroy
   end
 
+  # TODO: Convert this to a RSpec spec (if it's not already covered by a RSpec spec)
+  # run this test with:
+  # 1. docker-compose -f docker-compose.yml -f docker-compose.minitest.yml run --rm minitest bash
+  # 2. bundle exec ruby test/unit/project_remove_test.rb -n test_accept_request_does_not_revoke_request_for_single_package
   def test_accept_request_does_not_revoke_request_for_single_package
+    # before block start
     User.session = users(:Iggy)
     branch_package
     create_request
+    # before block end
 
+    # this line is needed since BsRequest#change_state relies on User.session
     User.session = users(:fred)
-    @request.change_state(newstate: 'accepted',
-                          force: true,
-                          user: 'fred')
+    # line below is the subject
+    @request.change_state(newstate: 'accepted', force: true, user: 'fred')
 
+    # this is testing BsRequest#change_state
     assert_equal :accepted, @request.reload.state
     assert_equal 0, HistoryElement::RequestRevoked.where(op_object_id: @request.id).count
 
+    # this is to cleanup, so it shouldn't be needed in rspec
     @package.project.destroy
   end
 
