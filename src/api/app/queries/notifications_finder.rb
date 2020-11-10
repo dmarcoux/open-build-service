@@ -24,6 +24,10 @@ class NotificationsFinder
                     user, user.groups.map(&:id))
   end
 
+  def for_groups_of_subscribed_user(user = User.session)
+    @relation.where("subscriber_type = 'Group' AND subscriber_id IN (?)", user.groups.map(&:id))
+  end
+
   def for_notifiable_type(type = 'unread')
     notifications = self.class.new(with_notifiable)
 
