@@ -1,0 +1,55 @@
+get:
+  summary: List all distributions.
+  description: |
+    List all distributions that can be build against.
+    This will not list distributions that are available via [interconnect](https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.concepts.html#id-1.5.10.3.5).
+    Check /distributions/include_remotes for this.
+  security:
+    - basic_authentication: []
+  responses:
+    '200':
+      $ref: '../components/responses/distributions.yaml'
+    '401':
+      $ref: '../components/responses/unauthorized.yaml'
+  tags:
+    - Distributions
+
+put:
+  summary: Write all distributions hosted on this OBS instance.
+  description: |
+    This Endpoint can be used to overwrite the list of all distributions hosted on this OBS instance.
+  security:
+    - basic_authentication: []
+  requestBody:
+    description: |
+      Distributions XML
+    content:
+      application/xml; charset=utf-8:
+        schema:
+          $ref: '../components/schemas/distributions.yaml'
+  responses:
+    '200':
+      description: |
+        OK. The Request has succeded.
+
+        XML Schema used for body validation: [distributions.rng](../schema/distributions.rng)
+      content:
+        application/xml; charset=utf-8:
+          schema:
+            $ref: '../components/schemas/api_response.yaml'
+          example:
+            code: 'ok'
+            summary: 'Ok'
+    '400':
+      description: Bad Request.
+      content:
+        application/xml; charset=utf-8:
+          schema:
+            $ref: '../components/schemas/api_response.yaml'
+          example:
+            code: 'validation_failed'
+            summary: 'distributions validation error: 40:0: ERROR: Expecting an element name, got nothing'
+    '401':
+      $ref: '../components/responses/unauthorized.yaml'
+  tags:
+    - Distributions
