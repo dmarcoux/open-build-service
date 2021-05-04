@@ -1,7 +1,7 @@
 class SCMStatusReporter
   attr_accessor :payload, :scm_token, :state
 
-  def initialize(payload, scm_token, event = nil)
+  def initialize(payload, scm_token, event_type = nil)
     @payload = payload
     @scm_token = scm_token
 
@@ -11,7 +11,7 @@ class SCMStatusReporter
     @state = if event.nil?
                'pending'
              else
-               case event.class.name
+               case event
                when 'Event::BuildFail'
                  github? ? 'failure' : 'failed'
                when 'Event::BuildSuccess'

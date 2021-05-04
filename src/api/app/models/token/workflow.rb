@@ -39,7 +39,7 @@ class Token::Workflow < Token
 
     ['Event::BuildFail', 'Event::BuildSuccess'].each do |build_event|
       EventSubscription.create!(eventtype: build_event,
-                                receiver_role: 'watcher', # TODO: check if this makes sense
+                                receiver_role: 'reader', # We pass a valid value, but we don't need this.
                                 user: user,
                                 channel: 'scm',
                                 enabled: true,
