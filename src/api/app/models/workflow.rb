@@ -16,7 +16,7 @@ class Workflow
         next if SUPPORTED_STEPS[step_name].blank?
 
         new_step = SUPPORTED_STEPS[step_name].new(step_instructions: step_instructions, scm_extractor_payload: @scm_extractor_payload, token: @token)
-        steps << new_step if new_step.allowed_event_and_action?
+        steps << new_step if new_step.allowed_event_and_action? # TODO: Use BranchPackageStepValidator.new.validate(new_step)
       end
     end
     steps

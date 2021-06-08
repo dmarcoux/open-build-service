@@ -1,11 +1,10 @@
-# rubocop:disable Metrics/ClassLength
-# This class will be refactored to use a ActiveModel::Validator
 class Workflow
   module Step
     class BranchPackageStep
       include ActiveModel::Model
 
       validates :source_project, :source_package, presence: true
+      validates_with BranchPackageStepValidator
 
       def initialize(step_instructions:, scm_extractor_payload:, token:)
         @step_instructions = step_instructions.with_indifferent_access
@@ -13,12 +12,8 @@ class Workflow
         @token = token
       end
 
-      def allowed_event_and_action?
-        new_pull_request?
-      end
-
       def call
-        return unless valid? && new_pull_request?
+        return unless valid?
 
         branched_package = branch
         return unless branched_package
@@ -83,19 +78,6 @@ class Workflow
         nil
       end
 
-      def github_pull_request?
-        @scm_extractor_payload[:scm] == 'github' && @scm_extractor_payload[:event] == 'pull_request'
-      end
-
-      def gitlab_merge_request?
-        @scm_extractor_payload[:scm] == 'gitlab' && @scm_extractor_payload[:event] == 'Merge Request Hook'
-      end
-
-      def new_pull_request?
-        (github_pull_request? && @scm_extractor_payload[:action] == 'opened') ||
-          (gitlab_merge_request? && @scm_extractor_payload[:action] == 'open')
-      end
-
       def add_branch_request_file(package:)
         branch_request_file = case @scm_extractor_payload[:scm]
                               when 'github'
@@ -140,4 +122,3 @@ class Workflow
     end
   end
 end
-# rubocop:enable Metrics/ClassLength
