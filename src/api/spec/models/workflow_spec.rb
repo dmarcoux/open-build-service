@@ -22,8 +22,13 @@ RSpec.describe Workflow, type: :model do
       let(:yaml) do
         { 'steps' => [{ 'branch_package' => { source_project: 'project',
                                               source_package: 'package' } },
-                      { 'branch_package' => { source_project: 'project',
-                                              source_package: 'package' } }] }
+                      { 'configure_repositories' => {
+                        'project' => 'home:Admin',
+                        'repositories' => [{ 'name' => 'openSUSE_Tumbleweed',
+                                             'target_project' => 'openSUSE:Factory',
+                                             'target_repository' => 'snapshot',
+                                             'architectures' => ['x86_64', 'i586'] }]
+                      } }] }
       end
 
       it 'returns an array with two items' do
@@ -66,8 +71,13 @@ RSpec.describe Workflow, type: :model do
       let(:yaml) do
         { 'steps' => [{ 'branch_package' => { source_project: 'project',
                                               source_package: 'package' } },
-                      { 'branch_package' => { source_project: 'project',
-                                              source_package: 'package' } }] }
+                      { 'configure_repositories' => {
+                        'project' => 'home:Admin',
+                        'repositories' => [{ 'name' => 'openSUSE_Tumbleweed',
+                                             'target_project' => 'openSUSE:Factory',
+                                             'target_repository' => 'snapshot',
+                                             'architectures' => ['x86_64', 'i586'] }]
+                      } }] }
       end
 
       it { expect(subject).to be_valid }
